@@ -1,4 +1,13 @@
+/*
+Implementation of LinkedList Variations
 
+Methods implemented:
+1. Display Linked List
+2. Reverse Linked List Iteratively
+3. Reverse Linked List Recursively
+4. Add to LinkedList
+
+*/
 public class LinkedListProblems {
 	
 	public static class Node{
