@@ -8,6 +8,7 @@ Methods implemented:
 4. Add to LinkedList
 5. DetectLoop
 6. Count Number of Nodes
+7. check palindrome using two pointers. Find mid..reverse second half and compare
 
 */
 public class LinkedListProblems {
@@ -32,7 +33,10 @@ public class LinkedListProblems {
 		l.add(3);
 		l.add(4);
 		l.add(5);
-		
+		l.add(4);
+		l.add(3);
+		l.add(2);
+		l.add(1);
 		System.out.println(displayList(head));
 		// use either of two below to reverse LinkedList
 		//System.out.println(displayList(reverseIterative(head)));
@@ -41,13 +45,41 @@ public class LinkedListProblems {
 			System.out.println("Loop Detected");
 		else
 			System.out.println("No loop Present");
-		System.out.println(countNodes(head));
+		System.out.println("Length of Linkedlist : "+ countNodes(head));
+		if(checkPalindrome(head))
+			System.out.println("Palindrome");
+		else
+			System.out.println("Not Palindrome");
 		
 
 	}
 
+	private static boolean checkPalindrome(Node node) {
+		Node fast = node; 
+        Node slow = node;
+        
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        if(fast != null){
+            slow=slow.next;
+        }
+        slow=reverseIterative(slow);
+        fast=node;
+        while (slow != null) {
+        if (fast.data != slow.data) {
+            return false;
+        }
+        fast = fast.next;
+        slow = slow.next;
+    }
+    return true;
+    }
+		
+	
+
 	private static int countNodes(Node node) {
-		// TODO Auto-generated method stub
 		int count=0;
 		if(node == null)
 			count=0;
