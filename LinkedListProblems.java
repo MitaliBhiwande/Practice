@@ -6,6 +6,8 @@ Methods implemented:
 2. Reverse Linked List Iteratively
 3. Reverse Linked List Recursively
 4. Add to LinkedList
+5. DetectLoop
+6. Count Number of Nodes
 
 */
 public class LinkedListProblems {
@@ -32,12 +34,45 @@ public class LinkedListProblems {
 		l.add(5);
 		
 		System.out.println(displayList(head));
-		// use either of two below
+		// use either of two below to reverse LinkedList
 		//System.out.println(displayList(reverseIterative(head)));
-		System.out.println(displayList(reverseRecursive(head)));
-		
+		//System.out.println(displayList(reverseRecursive(head)));
+		if(detectCycle(head))
+			System.out.println("Loop Detected");
+		else
+			System.out.println("No loop Present");
+		System.out.println(countNodes(head));
 		
 
+	}
+
+	private static int countNodes(Node node) {
+		// TODO Auto-generated method stub
+		int count=0;
+		if(node == null)
+			count=0;
+		while(node != null){
+			count++;
+			node=node.next;
+		}
+		return count;
+	}
+
+	private static boolean detectCycle(Node node) {
+		if(node==null)
+			return false;
+		Node slow=node;
+        Node fast=node;
+        
+        while(slow!=null && fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast)
+                return true; 
+        }
+        
+       return false; 
+		
 	}
 
 	private static Node reverseRecursive(Node node) {
@@ -76,7 +111,7 @@ public class LinkedListProblems {
 			String out="";
 			Node temp=node;
 			while(temp !=null){
-				out+=" --> "+temp.data;
+				out+=" <-- "+temp.data;
 				temp=temp.next;
 			}
 			return out;
@@ -92,6 +127,7 @@ public class LinkedListProblems {
 			temp.next=head;
 			head=temp;
 		}
+		
 		
 	}
 
